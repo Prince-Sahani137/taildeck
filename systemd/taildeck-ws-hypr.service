@@ -1,0 +1,11 @@
+[Unit]
+Description=TailDeck noVNC proxy (Hyprland / wayvnc)
+After=wayvnc.service
+
+[Service]
+ExecStart=%h/taildeck/scripts/run-ws-hypr.sh
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target

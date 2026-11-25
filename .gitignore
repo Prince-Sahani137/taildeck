@@ -1,0 +1,8 @@
+.env
+.panel-auth
+.tailnet-name
+.venv/
+__pycache__/
+*.pyc
+*.bak
+*.part

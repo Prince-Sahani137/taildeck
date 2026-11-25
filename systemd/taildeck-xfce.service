@@ -1,0 +1,13 @@
+# Example virtual XFCE desktop on :2 (TigerVNC). Adjust to your distro.
+# One-time setup: run `vncpasswd` to create ~/.vnc/passwd (the noVNC tab asks for it).
+[Unit]
+Description=TailDeck virtual XFCE desktop (TigerVNC :2)
+
+[Service]
+ExecStart=/usr/bin/vncserver :2 -fg -localhost yes -geometry 1920x1080 -SecurityTypes VncAuth
+ExecStartPost=-%h/taildeck/scripts/xfce-no-blank.sh
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target

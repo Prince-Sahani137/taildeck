@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0b0d14">
+<meta name="taildeck-origin" content="__HTTPS_ORIGIN__">
+<title>__PROJECT__</title>
+<!-- Absolute base so the page survives being opened at /vnc without a slash. -->
+<base href="/vnc/">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></symbol>
+  <symbol id="i-window" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 9h20"/></symbol>
+  <symbol id="i-terminal" viewBox="0 0 24 24"><path d="m4 17 6-6-6-6"/><path d="M12 19h8"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
+  <symbol id="i-logs" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M9 2v2M15 20v2M9 20v2M2 15h2M2 9h2M20 15h2M20 9h2"/></symbol>
+  <symbol id="i-memory" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="10" rx="2"/><path d="M6 19v-3M10 19v-3M14 19v-3M18 19v-3"/></symbol>
+  <symbol id="i-temp" viewBox="0 0 24 24"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></symbol>
+  <symbol id="i-gpu" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 18v3M18 18v3M6 10h4v4H6z"/></symbol>
+  <symbol id="i-disk" viewBox="0 0 24 24"><path d="M22 12H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11Z"/><path d="M6 16h.01M10 16h.01"/></symbol>
+  <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="1"/></symbol>
+  <symbol id="i-maximize" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15.36-6.36L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.36 6.36L3 16"/><path d="M3 21v-5h5"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+</svg>
+
+<div class="app">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <span class="mark"><svg class="icon" aria-hidden="true"><use href="#i-terminal"/></svg></span>
+      <span class="brand-text"><strong>TailDeck</strong><small id="brand-host">this host</small></span>
+      <button class="icon-btn only-mobile" id="close-menu" type="button" aria-label="Close menu">
+        <svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </div>
+
+    <nav class="nav" aria-label="Sections">
+      <p class="nav-label">Overview</p>
+      <a class="nav-item" href="#/overview" data-nav="overview">
+        <svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg><span>Overview</span>
+      </a>
+
+      <p class="nav-label">Workspaces</p>
+      <a class="nav-item" href="#/hypr" data-nav="hypr">
+        <svg class="icon" aria-hidden="true"><use href="#i-monitor"/></svg><span>Hyprland</span>
+        <i class="nav-dot" data-status="hypr"></i>
+      </a>
+      <a class="nav-item" href="#/xfce" data-nav="xfce">
+        <svg class="icon" aria-hidden="true"><use href="#i-window"/></svg><span>XFCE</span>
+        <i class="nav-dot" data-status="xfce"></i>
+      </a>
+      <a class="nav-item" href="#/term" data-nav="term">
+        <svg class="icon" aria-hidden="true"><use href="#i-terminal"/></svg><span>Terminal</span>
+        <i class="nav-dot" data-status="term"></i>
+      </a>
+
+      <p class="nav-label">Manage</p>
+      <a class="nav-item" href="#/files" data-nav="files">
+        <svg class="icon" aria-hidden="true"><use href="#i-folder"/></svg><span>Files</span>
+      </a>
+      <a class="nav-item" href="#/logs" data-nav="logs">
+        <svg class="icon" aria-hidden="true"><use href="#i-logs"/></svg><span>Logs</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-foot">
+      <div class="foot-state">
+        <i class="dot" id="ts-dot"></i>
+        <span id="ts-label">tailnet</span>
+      </div>
+    </div>
+  </aside>
+
+  <div class="scrim" id="scrim" hidden></div>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn only-mobile" id="menu-btn" type="button" aria-label="Open menu">
+        <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+      </button>
+      <div class="page-title">
+        <span id="page-kicker">Overview</span>
+        <h1 id="page-title">System overview</h1>
+      </div>
+      <div class="topbar-actions">
+        <span class="pill">
+          <svg class="icon" aria-hidden="true"><use href="#i-wifi"/></svg>
+          <span id="host-name">this host</span>
+        </span>
+        <button class="icon-btn" id="copy-url" type="button" title="Copy the panel address" aria-label="Copy the panel address">
+          <svg class="icon" aria-hidden="true"><use href="#i-copy"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <p class="notice" id="insecure" hidden>
+      <svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>
+      <span>This page is on plain HTTP, so the consoles can't start from here.
+      <a id="insecure-link" href="vnc/">Open the HTTPS panel</a>.</span>
+    </p>
+
+    <main id="views">
+
+      <!-- ---------------------------------------------------------- overview -->
+      <section class="view" data-view="overview" id="view-overview">
+
+        <div class="metrics">
+          <article class="metric">
+            <div class="metric-head">
+              <span class="metric-label"><svg class="icon" aria-hidden="true"><use href="#i-cpu"/></svg>CPU</span>
+              <span class="metric-sub" id="cpu-sub">—</span>
+            </div>
+            <p class="metric-value"><b id="cpu-value">—</b><span>%</span></p>
+            <svg class="spark" data-spark="cpu" viewBox="0 0 240 56" preserveAspectRatio="none" aria-hidden="true"></svg>
+          </article>
+
+          <article class="metric">
+            <div class="metric-head">
+              <span class="metric-label"><svg class="icon" aria-hidden="true"><use href="#i-memory"/></svg>Memory</span>
+              <span class="metric-sub" id="ram-sub">—</span>
+            </div>
+            <p class="metric-value"><b id="ram-value">—</b><span>%</span></p>
+            <svg class="spark" data-spark="ram" viewBox="0 0 240 56" preserveAspectRatio="none" aria-hidden="true"></svg>
+          </article>
+
+          <article class="metric">
+            <div class="metric-head">
+              <span class="metric-label"><svg class="icon" aria-hidden="true"><use href="#i-temp"/></svg>Package</span>
+              <span class="metric-sub" id="temp-sub">—</span>
+            </div>
+            <p class="metric-value"><b id="temp-value">—</b><span>°C</span></p>
+            <svg class="spark" data-spark="temp" viewBox="0 0 240 56" preserveAspectRatio="none" aria-hidden="true"></svg>
+          </article>
+
+          <article class="metric">
+            <div class="metric-head">
+              <span class="metric-label"><svg class="icon" aria-hidden="true"><use href="#i-gpu"/></svg>Graphics</span>
+              <span class="metric-sub" id="gpu-sub">—</span>
+            </div>
+            <p class="metric-value"><b id="gpu-value">—</b><span>%</span></p>
+            <svg class="spark" data-spark="gpu" viewBox="0 0 240 56" preserveAspectRatio="none" aria-hidden="true"></svg>
+          </article>
+        </div>
+
+        <details class="alert" id="alert" hidden>
+          <summary>
+            <svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>
+            <span id="alert-text">units failed</span>
+          </summary>
+          <ul class="alert-list" id="alert-list"></ul>
+        </details>
+
+        <div class="grid-2">
+          <section class="panel">
+            <div class="panel-head">
+              <h2>Hardware</h2>
+              <span class="meta" id="hw-meta">—</span>
+            </div>
+            <div class="hw">
+              <div class="hw-row"><span>Processor</span><b id="hw-cpu">—</b></div>
+              <div class="hw-row"><span>Load average</span><b id="hw-load">—</b></div>
+              <div class="hw-row"><span>Memory</span><b id="hw-ram">—</b></div>
+              <div class="meter"><i id="hw-ram-bar"></i></div>
+              <div class="hw-row"><span>Swap</span><b id="hw-swap">—</b></div>
+              <div class="meter"><i id="hw-swap-bar"></i></div>
+              <div class="hw-row"><span>Disk</span><b id="hw-disk">—</b></div>
+              <div class="meter"><i id="hw-disk-bar"></i></div>
+              <div class="hw-row"><span>Graphics</span><b id="hw-gpu">—</b></div>
+              <div class="meter"><i id="hw-gpu-bar"></i></div>
+              <div class="hw-row"><span>Battery</span><b id="hw-batt">—</b></div>
+              <div class="meter"><i id="hw-batt-bar"></i></div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <h2>System</h2>
+              <button class="btn btn-quiet btn-small" type="button" data-restart="vnc-stack">Restart stack</button>
+            </div>
+            <dl class="facts">
+              <div><dt>Uptime</dt><dd id="f-uptime">—</dd></div>
+              <div><dt>Tailnet</dt><dd id="f-ts">—</dd></div>
+              <div><dt>Containers</dt><dd id="f-containers">—</dd></div>
+              <div><dt>Backend</dt><dd id="f-backend">—</dd></div>
+            </dl>
+            <p class="hint">Hyprland mirrors this laptop's screen. XFCE is a separate session that stays logged in. Both listen only on the tailnet.</p>
+          </section>
+        </div>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Processes</h2>
+            <span class="meta">top by cpu · live</span>
+          </div>
+          <div class="proc-table">
+            <div class="proc-row proc-head" aria-hidden="true">
+              <span>Process</span><span>CPU</span><span></span><span>Mem</span>
+            </div>
+            <ul class="proc-list" id="procs"></ul>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Screens</h2>
+            <span class="meta" id="screens-meta">checking</span>
+          </div>
+          <div class="previews">
+            <a class="preview" href="#/hypr">
+              <span class="preview-shot"><img data-shot="hypr" alt=""><span class="preview-empty">no preview</span></span>
+              <span class="preview-body">
+                <span class="preview-title">Hyprland</span>
+                <span class="preview-note">mirrors the laptop screen</span>
+              </span>
+              <span class="status" data-status="hypr"><i></i><span>checking</span></span>
+            </a>
+            <a class="preview" href="#/xfce">
+              <span class="preview-shot"><img data-shot="xfce" alt=""><span class="preview-empty">no preview</span></span>
+              <span class="preview-body">
+                <span class="preview-title">XFCE</span>
+                <span class="preview-note">separate session · VNC password</span>
+              </span>
+              <span class="status" data-status="xfce"><i></i><span>checking</span></span>
+            </a>
+          </div>
+        </section>
+      </section>
+
+      <!-- ---------------------------------------------------------- hyprland -->
+      <section class="view" data-view="hypr" id="view-hypr" hidden>
+        <div class="ws-head">
+          <div class="ws-title">
+            <h2>Hyprland</h2>
+            <p>Mirrors the laptop screen. Same keyboard, same windows.</p>
+          </div>
+          <div class="ws-tools">
+            <span class="status" data-status="hypr"><i></i><span>checking</span></span>
+            <button class="btn btn-quiet btn-small" type="button" data-restart="hypr">
+              <svg class="icon" aria-hidden="true"><use href="#i-rotate"/></svg>Restart
+            </button>
+          </div>
+        </div>
+
+        <div class="tabs" role="tablist" data-tabs="hypr">
+          <button class="tab is-active" type="button" role="tab" data-tab="console">Console</button>
+          <button class="tab" type="button" role="tab" data-tab="logs">Logs</button>
+        </div>
+
+        <div class="tabpanes" data-panes="hypr">
+          <div class="pane is-active" data-pane="console">
+            <div class="console-bar">
+              <span class="console-path">/vnc/hypr/</span>
+              <div class="console-tools">
+                <button class="tool" type="button" data-reload="hypr" title="Reload console" aria-label="Reload console">
+                  <svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg>
+                </button>
+                <button class="tool" type="button" data-fullscreen="hypr" title="Fullscreen" aria-label="Fullscreen">
+                  <svg class="icon" aria-hidden="true"><use href="#i-maximize"/></svg>
+                </button>
+                <a class="tool" href="hypr/vnc.html?autoconnect=true&reconnect=true&resize=scale&path=websockify" target="_blank" rel="noopener" title="Open in a new tab" aria-label="Open in a new tab">
+                  <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>
+                </a>
+              </div>
+            </div>
+            <div class="console" data-console="hypr" data-src="hypr/vnc.html?autoconnect=true&reconnect=true&resize=scale&path=websockify">
+              <span class="console-placeholder">Console loads when this view opens.</span>
+            </div>
+          </div>
+
+          <div class="pane" data-pane="logs">
+            <div class="log-controls">
+              <select data-log-select="hypr" aria-label="Unit to stream">
+                <option value="hypr">wayvnc</option>
+                <option value="proxy-hypr">Proxy · Hyprland</option>
+              </select>
+              <button class="btn btn-quiet btn-small" type="button" data-log-toggle="hypr">
+                <svg class="icon" aria-hidden="true"><use href="#i-play"/></svg>Stream
+              </button>
+              <span class="log-state" data-log-state="hypr">idle</span>
+            </div>
+            <pre class="log" data-log="hypr"></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- -------------------------------------------------------------- xfce -->
+      <section class="view" data-view="xfce" id="view-xfce" hidden>
+        <div class="ws-head">
+          <div class="ws-title">
+            <h2>XFCE</h2>
+            <p>Separate desktop that stays logged in. noVNC asks for the VNC password.</p>
+          </div>
+          <div class="ws-tools">
+            <span class="status" data-status="xfce"><i></i><span>checking</span></span>
+            <button class="btn btn-quiet btn-small" type="button" data-restart="xfce">
+              <svg class="icon" aria-hidden="true"><use href="#i-rotate"/></svg>Restart
+            </button>
+          </div>
+        </div>
+
+        <div class="tabs" role="tablist" data-tabs="xfce">
+          <button class="tab is-active" type="button" role="tab" data-tab="console">Console</button>
+          <button class="tab" type="button" role="tab" data-tab="logs">Logs</button>
+        </div>
+
+        <div class="tabpanes" data-panes="xfce">
+          <div class="pane is-active" data-pane="console">
+            <div class="console-bar">
+              <span class="console-path">/vnc/xfce/ · VNC password</span>
+              <div class="console-tools">
+                <button class="tool" type="button" data-reload="xfce" title="Reload console" aria-label="Reload console">
+                  <svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg>
+                </button>
+                <button class="tool" type="button" data-fullscreen="xfce" title="Fullscreen" aria-label="Fullscreen">
+                  <svg class="icon" aria-hidden="true"><use href="#i-maximize"/></svg>
+                </button>
+                <a class="tool" href="xfce/vnc.html?autoconnect=true&reconnect=true&resize=scale&path=websockify" target="_blank" rel="noopener" title="Open in a new tab" aria-label="Open in a new tab">
+                  <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>
+                </a>
+              </div>
+            </div>
+            <div class="console" data-console="xfce" data-src="xfce/vnc.html?autoconnect=true&reconnect=true&resize=scale&path=websockify">
+              <span class="console-placeholder">Console loads when this view opens.</span>
+            </div>
+          </div>
+
+          <div class="pane" data-pane="logs">
+            <div class="log-controls">
+              <select data-log-select="xfce" aria-label="Unit to stream">
+                <option value="xfce">XFCE desktop</option>
+                <option value="proxy-xfce">Proxy · XFCE</option>
+              </select>
+              <button class="btn btn-quiet btn-small" type="button" data-log-toggle="xfce">
+                <svg class="icon" aria-hidden="true"><use href="#i-play"/></svg>Stream
+              </button>
+              <span class="log-state" data-log-state="xfce">idle</span>
+            </div>
+            <pre class="log" data-log="xfce"></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------------------------------------------------------- terminal -->
+      <section class="view" data-view="term" id="view-term" hidden>
+        <div class="ws-head">
+          <div class="ws-title">
+            <h2>Terminal</h2>
+            <p>A full shell in the browser, running as your user on this machine.</p>
+          </div>
+          <div class="ws-tools">
+            <span class="status" data-status="term"><i></i><span>checking</span></span>
+            <button class="btn btn-quiet btn-small" type="button" data-restart="term">
+              <svg class="icon" aria-hidden="true"><use href="#i-rotate"/></svg>Restart
+            </button>
+          </div>
+        </div>
+
+        <div class="tabs" role="tablist" data-tabs="term">
+          <button class="tab is-active" type="button" role="tab" data-tab="console">Console</button>
+          <button class="tab" type="button" role="tab" data-tab="logs">Logs</button>
+        </div>
+
+        <div class="tabpanes" data-panes="term">
+          <div class="pane is-active" data-pane="console">
+            <div class="console-bar">
+              <span class="console-path">/vnc/term/</span>
+              <div class="console-tools">
+                <button class="tool" type="button" data-reload="term" title="Reload console" aria-label="Reload console">
+                  <svg class="icon" aria-hidden="true"><use href="#i-refresh"/></svg>
+                </button>
+                <button class="tool" type="button" data-fullscreen="term" title="Fullscreen" aria-label="Fullscreen">
+                  <svg class="icon" aria-hidden="true"><use href="#i-maximize"/></svg>
+                </button>
+                <a class="tool" href="term/" target="_blank" rel="noopener" title="Open in a new tab" aria-label="Open in a new tab">
+                  <svg class="icon" aria-hidden="true"><use href="#i-external"/></svg>
+                </a>
+              </div>
+            </div>
+            <div class="console" data-console="term" data-src="term/">
+              <span class="console-placeholder">Console loads when this view opens.</span>
+            </div>
+          </div>
+
+          <div class="pane" data-pane="logs">
+            <div class="log-controls">
+              <select data-log-select="term" aria-label="Unit to stream">
+                <option value="term">ttyd</option>
+              </select>
+              <button class="btn btn-quiet btn-small" type="button" data-log-toggle="term">
+                <svg class="icon" aria-hidden="true"><use href="#i-play"/></svg>Stream
+              </button>
+              <span class="log-state" data-log-state="term">idle</span>
+            </div>
+            <pre class="log" data-log="term"></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ------------------------------------------------------------- files -->
+      <section class="view" data-view="files" id="view-files" hidden>
+        <div class="ws-head">
+          <div class="ws-title">
+            <h2>Files</h2>
+            <p>Move files between this machine and your browser.</p>
+          </div>
+          <div class="ws-tools">
+            <span class="meta mono" id="files-dir">~/Downloads</span>
+          </div>
+        </div>
+
+        <div class="grid-2 files-grid">
+          <section class="panel">
+            <div class="panel-head">
+              <h2>Upload</h2>
+              <span class="meta">max 512 MB per file</span>
+            </div>
+            <label class="drop" id="drop" for="file">
+              <svg class="icon" aria-hidden="true"><use href="#i-upload"/></svg>
+              <strong>Choose files or drop them here</strong>
+              <span>They land in ~/Downloads</span>
+            </label>
+            <input class="file-input" id="file" type="file" multiple>
+            <div class="upload-row">
+              <button class="btn btn-primary btn-small" id="upload" type="button" disabled>Upload</button>
+              <span class="meta" id="upload-note"></span>
+            </div>
+            <div class="progress" id="progress"><i id="upload-bar"></i></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <h2>Downloads</h2>
+              <span class="meta" id="files-count">—</span>
+            </div>
+            <ul class="files" id="files"></ul>
+          </section>
+        </div>
+      </section>
+
+      <!-- -------------------------------------------------------------- logs -->
+      <section class="view" data-view="logs" id="view-logs" hidden>
+        <div class="ws-head">
+          <div class="ws-title">
+            <h2>Logs</h2>
+            <p>Live journal streams for every service in the stack.</p>
+          </div>
+        </div>
+
+        <section class="panel panel-fill">
+          <div class="log-controls">
+            <select data-log-select="all" aria-label="Unit to stream">
+              <option value="hypr">wayvnc</option>
+              <option value="proxy-hypr">Proxy · Hyprland</option>
+              <option value="xfce">XFCE desktop</option>
+              <option value="proxy-xfce">Proxy · XFCE</option>
+              <option value="term">Terminal</option>
+              <option value="panel">Panel</option>
+            </select>
+            <button class="btn btn-quiet btn-small" type="button" data-log-toggle="all">
+              <svg class="icon" aria-hidden="true"><use href="#i-play"/></svg>Stream
+            </button>
+            <button class="btn btn-quiet btn-small" type="button" id="log-clear">Clear</button>
+            <span class="log-state" data-log-state="all">idle</span>
+          </div>
+          <pre class="log log-tall" data-log="all"></pre>
+        </section>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+<script src="app.js"></script>
+</body>
+</html>
