@@ -1,0 +1,12 @@
+[Unit]
+Description=TailDeck panel
+After=network-online.target tailscaled.service
+
+[Service]
+WorkingDirectory=%h/taildeck
+ExecStart=%h/taildeck/scripts/run-taildeck.sh
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target

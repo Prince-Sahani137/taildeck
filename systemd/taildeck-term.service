@@ -1,0 +1,10 @@
+[Unit]
+Description=TailDeck browser terminal (ttyd)
+
+[Service]
+ExecStart=%h/taildeck/scripts/run-term.sh
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target
