@@ -1,0 +1,13 @@
+# Example wayvnc unit for a Hyprland session (loopback, no auth: the panel and
+# its proxy are the only way in). Start it after Hyprland is running.
+[Unit]
+Description=wayvnc (Hyprland screen sharing, loopback only)
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/wayvnc 127.0.0.1 5900
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target

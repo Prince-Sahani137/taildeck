@@ -1,0 +1,42 @@
+{
+  "services": [
+    {
+      "id": "taildeck-ws-xfce",
+      "label": "noVNC proxy (desktop)",
+      "workspace": "xfce",
+      "role": "proxy",
+      "autostart": true,
+      "cmd": [
+        "python",
+        "-m",
+        "websockify",
+        "--web",
+        "${NOVNC_DIR}",
+        "--web-auth",
+        "--auth-plugin",
+        "BasicHTTPAuth",
+        "--auth-source",
+        "${PANEL_USER}:${PANEL_PASSWORD}",
+        "127.0.0.1:${WS_XFCE_PORT}",
+        "127.0.0.1:${VNC_XFCE_PORT}"
+      ]
+    },
+    {
+      "id": "taildeck-term",
+      "label": "Terminal (ttyd + PowerShell)",
+      "workspace": "term",
+      "autostart": true,
+      "cmd": [
+        "ttyd",
+        "-W",
+        "-i",
+        "127.0.0.1",
+        "-p",
+        "${TERM_PORT}",
+        "-c",
+        "${PANEL_USER}:${PANEL_PASSWORD}",
+        "powershell.exe"
+      ]
+    }
+  ]
+}

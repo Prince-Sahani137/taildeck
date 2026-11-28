@@ -1,0 +1,11 @@
+[Unit]
+Description=TailDeck noVNC proxy (XFCE / TigerVNC)
+After=taildeck-xfce.service
+
+[Service]
+ExecStart=%h/taildeck/scripts/run-ws-xfce.sh
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,15 @@
+.env
+.panel-auth
+.tailnet-name
+.venv/
+__pycache__/
+*.pyc
+*.bak
+*.part
+# local runtime state
+services.json
+taildeck.log
+taildeck.log.1
+.taildeck-pids-*.json
+novnc/
+tools/

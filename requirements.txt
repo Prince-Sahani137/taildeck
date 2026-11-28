@@ -1,0 +1,5 @@
+psutil>=5.9
+# Desktop thumbnails on Windows/macOS (optional; Linux uses scrot/maim/grim)
+Pillow>=10; sys_platform != "linux"
+# Console proxy used by the built-in service manager (needed for the desktop tab on Windows)
+websockify>=0.11; sys_platform == "win32"
